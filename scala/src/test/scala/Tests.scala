@@ -22,13 +22,13 @@ class Tests extends FlatSpec with Matchers {
     Day02.Part2.solve("5 9 2 8\n9 4 7 3\n3 8 6 5") should equal (9)
     Day02.Part2.solution should equal (288)
 
-    Day03.position(1) should equal((0, 0))
-    Day03.position(2) should equal((1, 0))
-    Day03.position(3) should equal((1, -1))
-    Day03.position(4) should equal((0, -1))
-    Day03.position(5) should equal((-1, -1))
-    Day03.position(6) should equal((-1, 0))
-    Day03.position(7) should equal((-1, 1))
+    Day03.Part1.position(1) should equal((0, 0))
+    Day03.Part1.position(2) should equal((1, 0))
+    Day03.Part1.position(3) should equal((1, -1))
+    Day03.Part1.position(4) should equal((0, -1))
+    Day03.Part1.position(5) should equal((-1, -1))
+    Day03.Part1.position(6) should equal((-1, 0))
+    Day03.Part1.position(7) should equal((-1, 1))
 
     Day03.Part1.solve(1) should equal(0)
     Day03.Part1.solve(12) should equal(3)
@@ -36,5 +36,17 @@ class Tests extends FlatSpec with Matchers {
     Day03.Part1.solve(1024) should equal(31)
 
     Day03.Part1.solution should equal(480)
+
+    Day03.Part2.positions(1) should equal (Seq((0, 0)))
+    Day03.Part2.positions(2) should equal (Seq((0, 0), (1, 0)))
+    Day03.Part2.positions(3) should equal (Seq((0, 0), (1, 0), (1, -1)))
+    Day03.Part2.positions(10) should equal (Seq((0,0), (1,0), (1,-1), (0,-1), (-1,-1), (-1,0), (-1,1), (0,1), (1,1), (2,1)))
+
+    Day03.Part2.solve(1) should equal (1)
+    Day03.Part2.solve(2) should equal (1)
+    Day03.Part2.solve(3) should equal (2)
+    Day03.Part2.solve(7) should equal (10)
+
+    Day03.Part2.solution should equal (349975)
   }
 }
