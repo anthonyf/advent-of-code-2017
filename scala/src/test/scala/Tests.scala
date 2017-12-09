@@ -1,4 +1,4 @@
-import com.af.aoc2017.{Day01, Day02}
+import com.af.aoc2017.{Day01, Day02, Day03}
 import org.scalatest.{FlatSpec, Matchers}
 
 class Tests extends FlatSpec with Matchers {
@@ -21,5 +21,20 @@ class Tests extends FlatSpec with Matchers {
 
     Day02.Part2.solve("5 9 2 8\n9 4 7 3\n3 8 6 5") should equal (9)
     Day02.Part2.solution should equal (288)
+
+    Day03.position(1) should equal((0, 0))
+    Day03.position(2) should equal((1, 0))
+    Day03.position(3) should equal((1, -1))
+    Day03.position(4) should equal((0, -1))
+    Day03.position(5) should equal((-1, -1))
+    Day03.position(6) should equal((-1, 0))
+    Day03.position(7) should equal((-1, 1))
+
+    Day03.Part1.solve(1) should equal(0)
+    Day03.Part1.solve(12) should equal(3)
+    Day03.Part1.solve(23) should equal(2)
+    Day03.Part1.solve(1024) should equal(31)
+
+    Day03.Part1.solution should equal(480)
   }
 }
