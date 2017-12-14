@@ -1,4 +1,5 @@
-import com.af.aoc2017.{Day01, Day02, Day03}
+import com.af.aoc2017.Day07.InputItem
+import com.af.aoc2017.{Day01, Day02, Day03, Day07}
 import org.scalatest.{FlatSpec, Matchers}
 
 class Tests extends FlatSpec with Matchers {
@@ -48,5 +49,10 @@ class Tests extends FlatSpec with Matchers {
     Day03.Part2.solve(7) should equal (10)
 
     Day03.Part2.solution should equal (349975)
+
+    Day07.loadInput()(0) should equal (InputItem("mqdjo", 83, Seq()))
+    Day07.loadInput()(1) should equal (InputItem("jzgxy", 15, Seq("usdayz", "zvbru")))
+
+    Day07.Part1.solution should equal ("dtacyn")
   }
 }
