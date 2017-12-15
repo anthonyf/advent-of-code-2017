@@ -54,5 +54,11 @@ class Tests extends FlatSpec with Matchers {
     Day07.loadInput(Day07.input)(1) should equal (InputItem("jzgxy", 15, Seq("usdayz", "zvbru")))
 
     Day07.Part1.solution should equal ("dtacyn")
+
+    Day07.Part2.weight("ugml", Day07.Part2.makeTree(Day07.loadInput(Day07.testData))) should equal (251)
+
+    Day07.Part2.solve(Day07.testData) should equal (60)
+
+    Day07.Part2.solution should equal(521)
   }
 }

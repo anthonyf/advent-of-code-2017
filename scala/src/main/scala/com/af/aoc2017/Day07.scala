@@ -1,5 +1,7 @@
 package com.af.aoc2017
 
+import scala.collection.immutable.Map
+
 object Day07 {
 
   object Part1 {
@@ -15,10 +17,66 @@ object Day07 {
   }
 
   object Part2 {
-    def solution: Int = {
-      val input = loadInput()
-      ???
+    case class Node(weight:Int, children:Seq[String])
+
+    type Tree = Map[String, Node]
+    def Tree():Tree = Map()
+
+    def makeTree(items: Seq[InputItem]): Tree = {
+      items.foldLeft(Tree()) { (m, item) =>
+        m + (item.name -> Node(item.weight, item.children))
+      }
     }
+
+    def weight(name: String, tree: Tree): Int = {
+      val me = tree(name)
+      me.children.map(c => weight(c, tree)).sum + me.weight
+    }
+
+    def findCorrectWeight(name: String, tree: Tree): Option[Int] = {
+      val me = tree(name)
+      if(me.children.nonEmpty) {
+        val childDiffWeights = me.children
+          .flatMap(c => findCorrectWeight(c, tree))
+        if(childDiffWeights.nonEmpty) {
+          Some(childDiffWeights.head)
+        } else {
+          val firstChildWeight = weight(me.children.head, tree)
+          val childWeights = me.children.map(c => weight(c, tree))
+          if(childWeights.forall(w => w == firstChildWeight)) {
+            None
+          } else {
+            // Weights are wrong.  Find the correct weight
+            println(s"childWeights=$childWeights")
+            val weightsByFrequency = childWeights
+              .map(w => w -> 1)
+              .groupBy { case (w, _) => w }
+              .map { case (w, is) => w -> is.length }
+              .toList
+            val max = weightsByFrequency
+              .maxBy { case (_, i) => i }
+              ._1
+            val min = weightsByFrequency
+              .minBy { case (_, i) => i }
+              ._1
+            val diff = max - min
+            val minChild = me.children.filter(c => weight(c, tree) == min).head
+            Some(tree(minChild).weight + diff)
+          }
+        }
+      } else {
+        None
+      }
+    }
+
+    def solve(input: String): Int = {
+      val items = loadInput(input)
+      val tree = makeTree(items)
+      val root = Part1.rootItem(items)
+      findCorrectWeight(root, tree).get
+    }
+
+    def solution = solve(input)
   }
 
   case class InputItem(name: String, weight: Int, children: Seq[String])
@@ -36,6 +94,20 @@ object Day07 {
       InputItem(name, weight, children)
     }.toSeq
   }
+
+  val testData = """pbga (66)
+                   |xhth (57)
+                   |ebii (61)
+                   |havc (66)
+                   |ktlj (57)
+                   |fwft (72) -> ktlj, cntj, xhth
+                   |qoyq (66)
+                   |padx (45) -> pbga, havc, qoyq
+                   |tknk (41) -> ugml, padx, fwft
+                   |jptl (61)
+                   |ugml (68) -> gyxo, ebii, jptl
+                   |gyxo (61)
+                   |cntj (57)""".stripMargin('|')
 
   val input = """mqdjo (83)
                 |jzgxy (15) -> usdayz, zvbru
