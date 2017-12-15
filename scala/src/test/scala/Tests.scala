@@ -50,8 +50,8 @@ class Tests extends FlatSpec with Matchers {
 
     Day03.Part2.solution should equal (349975)
 
-    Day07.loadInput()(0) should equal (InputItem("mqdjo", 83, Seq()))
-    Day07.loadInput()(1) should equal (InputItem("jzgxy", 15, Seq("usdayz", "zvbru")))
+    Day07.loadInput(Day07.input)(0) should equal (InputItem("mqdjo", 83, Seq()))
+    Day07.loadInput(Day07.input)(1) should equal (InputItem("jzgxy", 15, Seq("usdayz", "zvbru")))
 
     Day07.Part1.solution should equal ("dtacyn")
   }

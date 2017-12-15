@@ -3,21 +3,27 @@ package com.af.aoc2017
 object Day07 {
 
   object Part1 {
-    def solution: String = {
-      val input = loadInput()
-      val hasParentSet = input.foldLeft(Set[String]()) { (m: Set[String], item: InputItem) =>
-        item.children.foldLeft(m) { (m: Set[String], s) => m + s }
+
+    def rootItem(items: Seq[InputItem]): String = {
+      val hasParentSet = items.foldLeft(Set[String]()) { (m, item) =>
+        item.children.foldLeft(m) { (m, s) => m + s }
       }
-      (input.map(_.name).toSet -- hasParentSet).head
+      (items.map(_.name).toSet -- hasParentSet).head
     }
+
+    def solution: String = rootItem(loadInput(input))
   }
 
   object Part2 {
+    def solution: Int = {
+      val input = loadInput()
+      ???
+    }
   }
 
   case class InputItem(name: String, weight: Int, children: Seq[String])
 
-  def loadInput(): Seq[InputItem] = {
+  def loadInput(input: String): Seq[InputItem] = {
     input.lines.map { line =>
       val s = line.split(" -> ")
       val children = if (s.length == 2)
