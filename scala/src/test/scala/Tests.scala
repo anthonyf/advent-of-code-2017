@@ -65,5 +65,8 @@ class Tests extends FlatSpec with Matchers {
 
     Day08.Part1.solution should equal (5075)
 
+    Day08.Part2.solve(Day08.testInput) should equal (10)
+
+    Day08.Part2.solution should equal (7310)
   }
 }

@@ -40,10 +40,55 @@ object Day08 {
       }
       regs + (item.targetReg -> (regs.getOrElse(item.targetReg, 0) + inc * item.opN))
     }
+
+    type Regs = Map[String, Int]
+    def Regs(): Regs = Map()
+
   }
 
-  type Regs = Map[String, Int]
-  def Regs(): Regs = Map()
+  object Part2 {
+    def solution = solve(input)
+
+    def solve(input:String): Int = {
+      val items = loadInput(input)
+      items
+        .foldLeft(Regs()) { (regs, item) =>
+          if(evalCond(item, regs))
+            evalOp(item, regs)
+          else
+            regs
+        }
+        .map { case (_, (_, m)) => m }
+        .max
+    }
+
+    def evalCond(item: InputItem, regs: Regs): Boolean = {
+      val (regVal, _) = regs.getOrElse(item.condReg, (0, 0))
+      item.condOp match {
+        case "==" => regVal == item.condN
+        case ">=" => regVal >= item.condN
+        case "<=" => regVal <= item.condN
+        case ">" => regVal > item.condN
+        case "<" => regVal < item.condN
+        case "!=" => regVal != item.condN
+      }
+    }
+
+    def evalOp(item: InputItem, regs: Regs): Regs = {
+      val inc = item.op match {
+        case "inc" => 1
+        case "dec" => -1
+      }
+      val (oldVal, oldMax) = regs.getOrElse(item.targetReg, (0, 0))
+      val newVal = oldVal + inc * item.opN
+      val newMax = Math.max(oldMax, newVal)
+      regs + (item.targetReg -> (newVal -> newMax))
+    }
+
+    type Regs = Map[String, (Int, Int)]
+    def Regs(): Regs = Map()
+
+  }
 
   case class InputItem(targetReg: String, op: String, opN: Int, condReg: String, condOp: String, condN: Int)
 
