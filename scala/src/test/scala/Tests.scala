@@ -1,5 +1,5 @@
 import com.af.aoc2017.Day07.InputItem
-import com.af.aoc2017.{Day01, Day02, Day03, Day07}
+import com.af.aoc2017._
 import org.scalatest.{FlatSpec, Matchers}
 
 class Tests extends FlatSpec with Matchers {
@@ -60,5 +60,10 @@ class Tests extends FlatSpec with Matchers {
     Day07.Part2.solve(Day07.testData) should equal (60)
 
     Day07.Part2.solution should equal(521)
+
+    Day08.Part1.solve(Day08.testInput) should equal (1)
+
+    Day08.Part1.solution should equal (5075)
+
   }
 }
