@@ -79,5 +79,15 @@ class Tests extends FlatSpec with Matchers {
     Day09.Part1.solve("{{<a!>},{<a!>},{<a!>},{<ab>}}") should equal (3)
 
     Day09.Part1.solution should equal (12897)
+
+    Day09.Part2.solve("<>") should equal (0)
+    Day09.Part2.solve("<random characters>") should equal (17)
+    Day09.Part2.solve("<<<<>") should equal(3)
+    Day09.Part2.solve("<{!>}>") should equal(2)
+    Day09.Part2.solve("<!!>") should equal(0)
+    Day09.Part2.solve("<!!!>>") should equal(0)
+    Day09.Part2.solve("<{o\"i!a,<{i<a>") should equal(10)
+
+    Day09.Part2.solution should equal(7031)
   }
 }
