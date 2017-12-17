@@ -47,7 +47,6 @@ object Day07 {
             None
           } else {
             // Weights are wrong.  Find the correct weight
-            println(s"childWeights=$childWeights")
             val weightsByFrequency = childWeights
               .map(w => w -> 1)
               .groupBy { case (w, _) => w }

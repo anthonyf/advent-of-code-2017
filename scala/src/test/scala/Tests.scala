@@ -68,5 +68,16 @@ class Tests extends FlatSpec with Matchers {
     Day08.Part2.solve(Day08.testInput) should equal (10)
 
     Day08.Part2.solution should equal (7310)
+
+    Day09.Part1.solve("{}") should equal (1)
+    Day09.Part1.solve("{{{}}}") should equal (6)
+    Day09.Part1.solve("{{},{}}") should equal (5)
+    Day09.Part1.solve("{{{},{},{{}}}}") should equal (16)
+    Day09.Part1.solve("{<a>,<a>,<a>,<a>}") should equal (1)
+    Day09.Part1.solve("{{<ab>},{<ab>},{<ab>},{<ab>}}") should equal (9)
+    Day09.Part1.solve("{{<!!>},{<!!>},{<!!>},{<!!>}}") should equal (9)
+    Day09.Part1.solve("{{<a!>},{<a!>},{<a!>},{<ab>}}") should equal (3)
+
+    Day09.Part1.solution should equal (12897)
   }
 }
